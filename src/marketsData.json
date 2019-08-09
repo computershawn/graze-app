@@ -1,0 +1,25 @@
+([
+  {
+  "id": 123,
+  "title": "Baldwin Hills Crenshaw Farmers Market",
+  "schedule": "Saturdays from 9 a.m. to 5 p.m.",
+  "address": "3650 W. Martin Luther King Jr. Blvd.",
+  "info": "Praesent sagittis a mi sit amet dictum. Donec orci nibh, dignissim in leo et, congue semper mauris. Donec elit lacus,
+dictum et placerat eget, rhoncus sodales erat."
+},
+{
+  "id": 456,
+  "title": "Boyle Heights Community Market",
+  "schedule": "Sundays from 3:30 to 9 p.m.",
+  "address": "1831 E. 1st St.",
+  "info": "Praesent sagittis a mi sit amet dictum. Donec orci nibh, dignissim in leo et, congue semper mauris. Donec elit lacus,
+dictum et placerat eget, rhoncus sodales erat."
+},
+{
+  "id": 789,
+  "title": "Mar Vista Farmer's Market",
+  "schedule": "Sundays from 9 a.m. to 2 p.m.",
+  "address": "3826 Grand View Blvd",
+  "info": "Praesent sagittis a mi sit amet dictum. Donec orci nibh, dignissim in leo et, congue semper mauris. Donec elit lacus,
+dictum et placerat eget, rhoncus sodales erat."
+}])

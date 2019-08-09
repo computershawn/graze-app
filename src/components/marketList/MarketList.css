@@ -1,0 +1,55 @@
+nav,
+footer {
+  padding: 1% 0;
+  background-color: #aaa;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+header {
+  padding: 45px 15px;
+}
+
+article {
+  min-height: 200px;
+  padding: 30px 15px;
+  background-color: #bbb;
+}
+
+article:nth-child(even) {
+  background-color: #ddd;
+}
+
+p {
+  margin: 0 auto;
+  max-width: 650px;
+}
+
+p + p {
+  margin-top: 15px;
+}
+
+dream-description::before {
+  font-family: Georgia, serif;
+  position: absolute;
+  font-size: 6em;
+  line-height: 1;
+  top: 0;
+  left: 0;
+  content: "here"
+}
+
+
+
+@media screen and (min-width: 960px) {
+  p {
+    margin: 0 auto;
+    max-width: 100%;
+  }  
+}
