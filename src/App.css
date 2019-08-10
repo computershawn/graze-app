@@ -97,6 +97,15 @@ label {
   cursor: pointer;
 }
 
+.checkbox-category {
+  display: block;
+  max-width: 500px;
+}
+
+.checkbox-category input {
+  width: 2em;
+}
+
 .schedule-title {
   font-size: .75em;
   font-weight: 600;

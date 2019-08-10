@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import './App.css';
-import MarketList from './components/MarketList/MarketList';
-import MarketDetail from './components/MarketDetail/MarketDetail';
-import EditMarketDetail from './components/EditMarketDetail/EditMarketDetail';
+import React, { Component } from 'react'
+import './App.css'
+import MarketList from './components/MarketList/MarketList'
+import MarketDetail from './components/MarketDetail/MarketDetail'
+import EditMarketDetail from './components/EditMarketDetail/EditMarketDetail'
+import CreateVendor from './components/CreateVendor/CreateVendor'
 
 class App extends Component {
   render() {
@@ -32,7 +33,8 @@ class App extends Component {
       <div className="App">
         {/* <MarketList /> */}
         {/* <MarketDetail marketProps={marketProps}/> */}
-        <EditMarketDetail />
+        {/* <EditMarketDetail /> */}
+        <CreateVendor />
       </div>
     );
   }
