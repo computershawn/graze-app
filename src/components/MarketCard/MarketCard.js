@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Market.css';
+import './MarketCard.css';
 
 
-class Market extends Component {
+class MarketCard extends Component {
   render() {
-    const { market_name, market_schedule, market_address, market_info } = this.props
+    const { market_name, market_schedule, market_address, market_summary } = this.props
     return (
       <article>
         <div>
@@ -15,19 +15,19 @@ class Market extends Component {
             Where: {market_address}
           </p>
         </div>
-        <p>{market_info}</p>
+        <p>{market_summary}</p>
         <p>Learn More</p>
       </article>
     );
   }
 }
 
-Market.propTypes = {
+MarketCard.propTypes = {
   market_name: PropTypes.string.isRequired,
   market_schedule: PropTypes.string.isRequired,
   market_address: PropTypes.string.isRequired,
-  market_info: PropTypes.string.isRequired,
+  market_summary: PropTypes.string.isRequired,
 };
 
 
-export default Market;
+export default MarketCard;
