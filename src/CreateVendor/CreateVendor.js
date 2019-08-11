@@ -1,38 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import './CreateVendor.css';
+// In production, categories and market name
+// info will be retrieved from database 
+import dummyStore from '../dummy-store'
 
 
-// In production, market names info
-// will be retrieved from database 
-const tempMarketNames = [
-  `-`,
-  `Baldwin Hills Crenshaw Farmers Market`,
-  `Mar Vista Farmer's Market`,
-  `Culver City Farmer's Market`,
-  `Boyle Heights Farmer's Market`,
-  `Silver Lake Saturday Market`]
-
-// In production, categories info
-// will be retrieved from database 
-const tempCategories = {
-  'Fruits & Vegetables': false,
-  'Grains & Nuts': false,
-  'Poultry': false,
-  'Meats': false,
-  'Seafood': false,
-  'Other': false
-}
 
 
 class CreateVendor extends Component {
   constructor(props) {
     super(props);
+    let newCats = {}
+    dummyStore.tempCategories.forEach(cat => {
+      newCats[cat] = false
+    })
     this.state = {
-      vendorName: `Veggies Etc`,
+      vendorName: `example: Veggies Etc`,
       stallNumber: `example: A-23`,
       description: `History and any other important information about this vendor stall...`,
       market: null,
-      categories: tempCategories,
+      categories: newCats,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -42,7 +29,7 @@ class CreateVendor extends Component {
   handleSubmit(e) {
     console.log(this.state)
     e.preventDefault()
-    // ...Insert code to insert this new vendor info into the database >>>
+    // Add code to insert this new vendor info into the database >>>
   }
 
   handleChange(e) {
@@ -99,7 +86,7 @@ class CreateVendor extends Component {
             <div className="form-section">
               <label htmlFor="market">Market</label>
               <select name="market" onChange={this.handleChange} required>
-                {tempMarketNames.map(marketName => {
+                {dummyStore.tempMarketNames.map(marketName => {
                   let val = marketName === '-' ? '' : marketName
                   return <option key={marketName} value={val}>{marketName}</option>
                 })}

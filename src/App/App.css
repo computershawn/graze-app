@@ -34,7 +34,7 @@ header {
 article {
   min-height: 200px;
   padding: 30px 15px;
-  background-color: #bbb;
+  background-color: #d2d2d2;
 }
 
 article:nth-child(even) {
@@ -44,7 +44,7 @@ article:nth-child(even) {
 section {
   min-height: 200px;
   padding: 30px 15px;
-  background-color: #bbb;
+  background-color: #d2d2d2;
 }
 
 section:nth-child(even) {

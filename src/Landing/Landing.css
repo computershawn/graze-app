@@ -1,0 +1,9 @@
+.app-title {
+  letter-spacing: .4rem;
+  font-weight: 200;
+  margin-bottom: 0;
+}
+
+header p {
+  font-size: .9em;
+}

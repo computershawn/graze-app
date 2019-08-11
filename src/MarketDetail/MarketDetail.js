@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import './MarketDetail.css';
+import dummyStore from '../dummy-store';
 
 
 class MarketDetail extends Component {
   render() {
-    const { title, /*hero_image,*/ schedule, address, categories, vendor_list } = this.props.marketProps
-    const paragraphs = this.props.marketProps.description.split('****')
+    const { title, /*hero_image,*/ schedule, address, categories, vendor_list } = this.props
+    const paragraphs = this.props.description.split('****')
     const descriptionHTML = paragraphs.map((para, i) => <p key={i}>{para}</p>)
     const cats = categories.join(', ')
     const vendorList = vendor_list.map(vendor => {
       return <li key={vendor.id}>{vendor.title} | {vendor.stall}</li>
     });
-
 
     return (
       <main>
@@ -40,5 +40,7 @@ class MarketDetail extends Component {
     );
   }
 }
+
+MarketDetail.defaultProps = dummyStore.tempMarket
 
 export default MarketDetail;

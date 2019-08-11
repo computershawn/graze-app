@@ -8,15 +8,11 @@ class MarketCard extends Component {
     const { market_name, market_schedule, market_address, market_summary } = this.props
     return (
       <article>
-        <div>
-          <h2>{market_name}</h2>
-          <p>
-            When: {market_schedule}<br />
-            Where: {market_address}
-          </p>
-        </div>
+        <h3>{market_name}</h3>
+        <p><strong>When</strong>: {market_schedule}</p>
+        <p><strong>Where</strong>: {market_address}</p>
         <p>{market_summary}</p>
-        <p>Learn More</p>
+        <p><a href="http://nothing.com">Learn More</a></p>
       </article>
     );
   }

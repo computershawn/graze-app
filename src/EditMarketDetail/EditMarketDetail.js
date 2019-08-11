@@ -1,54 +1,26 @@
 import React, { Component } from 'react';
 import './EditMarketDetail.css';
+// In production, vendors, categories, description, schedule
+// and address info will be retrieved from database 
+import dummyStore from '../dummy-store'
 
 
-// In production, vendor info will
-// be retrieved from database 
-const tempVendors = [
-  'At Vero Eos Et Accusamus | H-12',
-  'Et Iusto Odio | H-12',
-  'Dignissimos Ducimus | H-12',
-  'Qui Blanditiis | H-12',
-  'Praesentium Voluptatum | H-12',
-  'Deleniti Atque | H-12',
-  'Corrupti Quos Dolores | H-12',
-  'Et Quas Molestias | H-12',
-  'Excepturi | H-12',
-  'Sint Occaecati | H-12',
-  'Cupiditate Non Provident | H-12',
-  'Similique Sunt | H-12'
-]
-
-// In production, categories info
-// will be retrieved from database 
-const tempCategories = [
-  'Fruits',
-  'Vegetables',
-  'Bakery',
-  'Live Music'
-]
-
-// In production, description, schedule and
-// address will be retrieved from database 
-const tempDescription = `The Baldwin Hills Crenshaw Farmers Market has offered locally-grown fruits and vegetables, and freshly-prepared foods for over 25 years. Here is some more information sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. Here's even more information ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui.`
-const tempSchedule = 'Saturdays from 9 a.m. to 5 p.m.'
-const tempAddress = '3650 W. Martin Luther King Jr. Blvd.'
 
 
 class EditMarketDetail extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    const { description, schedule, address, categories } = dummyStore.tempMarket
+    const days = {'Sun':false, 'Mon':false, 'Tue':false, 'Wed':false, 'Thu':false, 'Fri':false, 'Sat':false}
     this.state = {
       startAMPM: 'AM',
       endAMPM: 'PM',
-      description: tempDescription,
-      days: {
-        'Sun': false, 'Mon': false, 'Tue': false, 'Wed': false, 'Thu': false, 'Fri': false, 'Sat': false
-      },
-      schedule: tempSchedule,
-      address: tempAddress,
-      categories: tempCategories,
-      vendors: tempVendors
+      description: description,
+      days: days,
+      schedule: schedule,
+      address: address,
+      categories: categories,
+      vendors: dummyStore.tempVendors
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -100,28 +72,29 @@ class EditMarketDetail extends Component {
   }
 
   render() {
-    const { categories, vendors } = this.state
+    const { categories, vendors, description, schedule, address } = this.state
     return (
       <main>
         <header>
           <h1>Edit Market Details</h1>
+          <p>{dummyStore.tempMarket.title}</p>
         </header>
         <section>
           <form onSubmit={this.handleSubmit}>
             <div className="form-section">
               <label htmlFor="description">Description</label>
-              <textarea value={this.state.description} name="description" rows="10" onChange={this.handleChange} required />
+              <textarea value={description} name="description" rows="10" onChange={this.handleChange} required />
             </div>
 
             <div className="form-section">
               {/*this.makeCheckboxes()*/}
               <label htmlFor="schedule">Days</label>
-              <input type="text" name="schedule" value={this.state.schedule} onChange={this.handleChange} required />
+              <input type="text" name="schedule" value={schedule} onChange={this.handleChange} required />
             </div>
 
             <div className="form-section">
               <label htmlFor="address">Address</label>
-              <input type="text" name="address" value={this.state.address} onChange={this.handleChange} required />
+              <input type="text" name="address" value={address} onChange={this.handleChange} required />
             </div>
 
             <div className="form-section">
