@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import './SearchMarketItems.css';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import Nav from '../Nav/Nav'
+import './SearchMarketItems.css'
 // In production, itemsListing info will
 // be retrieved from the database 
 import dummyStore from '../dummy-store'
@@ -16,7 +18,7 @@ class SearchMarketItems extends Component {
       haveResults: false,
       searchResults: [],
       itemNotFound: false
-    }    
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -49,12 +51,14 @@ class SearchMarketItems extends Component {
   formatSearchResults() {
     const { prevSearchTerm } = this.state
     let resultsHTML = this.state.searchResults.map(result => {
+      const linkTo = `/markets/${result.marketId}`
       return (
         <article key={result.vendorName}>
           <h4>{result.marketName} | <a href="http://nothing.com">Map</a></h4>
           <p><em>
-          ${result.foods[prevSearchTerm]} at {result.vendorName} (Stall {result.vendorStall})<br />
+            ${result.foods[prevSearchTerm]} at {result.vendorName} (Stall {result.vendorStall})<br />
           </em></p>
+          <p><Link to={linkTo}>View this Market</Link></p>
         </article>
       )
     })
@@ -64,41 +68,44 @@ class SearchMarketItems extends Component {
   render() {
     const { prevSearchTerm, haveResults, itemNotFound } = this.state
     return (
-      <main>
-        <header>
-          <h1>Freshness Finder</h1>
-        </header>
+      <>
+        <Nav />
+        <main>
+          <header>
+            <h1>Freshness Finder</h1>
+          </header>
 
-        <section>
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-section">
-              <label htmlFor="searchTerm">What are you shopping for today?</label>
-              <input type="text" name="searchTerm" placeholder='Apples' onChange={this.handleChange} required />
-            </div>
-            <button type="submit">Find It!</button>
-          </form>
-        </section>
+          <section>
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-section">
+                <label htmlFor="searchTerm">What are you shopping for today?</label>
+                <input type="text" name="searchTerm" placeholder='Apples' onChange={this.handleChange} required />
+              </div>
+              <button type="submit">Find It!</button>
+            </form>
+          </section>
 
-        {
-          (haveResults && !itemNotFound) && (
-            <section>
-              <div className="results-title">
-                <p>Search results for <strong>{prevSearchTerm}</strong>:</p>
-              </div>
-              <div>
-                {this.formatSearchResults()}
-              </div>
-            </section>
-        )}
-        {
-          itemNotFound && (
-            <section>
-              <div className="results-title">
-                <p>Sorry, no markets in this area have <strong>{prevSearchTerm}</strong></p>
-              </div>
-            </section>
-        )}
-      </main>
+          {
+            (haveResults && !itemNotFound) && (
+              <section>
+                <div className="results-title">
+                  <p>Search results for <strong>{prevSearchTerm}</strong>:</p>
+                </div>
+                <div>
+                  {this.formatSearchResults()}
+                </div>
+              </section>
+            )}
+          {
+            itemNotFound && (
+              <section>
+                <div className="results-title">
+                  <p>Sorry, no markets in this area have <strong>{prevSearchTerm}</strong></p>
+                </div>
+              </section>
+            )}
+        </main>
+      </>
     );
   }
 }

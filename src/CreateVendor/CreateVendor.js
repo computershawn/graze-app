@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Nav from '../Nav/Nav'
 import './CreateVendor.css';
 // In production, categories and market name
 // info will be retrieved from database 
@@ -11,7 +12,7 @@ class CreateVendor extends Component {
   constructor(props) {
     super(props);
     let newCats = {}
-    dummyStore.tempCategories.forEach(cat => {
+    dummyStore.vendorCategories.forEach(cat => {
       newCats[cat] = false
     })
     this.state = {
@@ -72,48 +73,51 @@ class CreateVendor extends Component {
   render() {
     const { vendorName, stallNumber, description } = this.state
     return (
-      <main>
-        <header>
-          <h1>Create New Vendor</h1>
-        </header>
-        <section>
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-section">
-              <label htmlFor="vendorName">Name</label>
-              <input type="text" name="vendorName" placeholder={vendorName} onChange={this.handleChange} required />
-            </div>
+      <>
+        <Nav />
+        <main>
+          <header>
+            <h1>Create New Vendor</h1>
+          </header>
+          <section>
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-section">
+                <label htmlFor="vendorName">Name</label>
+                <input type="text" name="vendorName" placeholder={vendorName} onChange={this.handleChange} required />
+              </div>
 
-            <div className="form-section">
-              <label htmlFor="market">Market</label>
-              <select name="market" onChange={this.handleChange} required>
-                {dummyStore.tempMarketNames.map(marketName => {
-                  let val = marketName === '-' ? '' : marketName
-                  return <option key={marketName} value={val}>{marketName}</option>
-                })}
-              </select>
-            </div>
+              <div className="form-section">
+                <label htmlFor="market">Market</label>
+                <select name="market" onChange={this.handleChange} required>
+                  {dummyStore.marketNames.map(marketName => {
+                    let val = marketName === '-' ? '' : marketName
+                    return <option key={marketName} value={val}>{marketName}</option>
+                  })}
+                </select>
+              </div>
 
-            <div className="form-section">
-              <label htmlFor="stallNumber">Stall Number</label>
-              <input type="text" name="stallNumber" placeholder={stallNumber} onChange={this.handleChange} required />
-            </div>
+              <div className="form-section">
+                <label htmlFor="stallNumber">Stall Number</label>
+                <input type="text" name="stallNumber" placeholder={stallNumber} onChange={this.handleChange} required />
+              </div>
 
-            <div className="form-section">
-              <label htmlFor="description">Description</label>
-              <textarea placeholder={description} name="description" rows="10" onChange={this.handleChange} required />
-            </div>
+              <div className="form-section">
+                <label htmlFor="description">Description</label>
+                <textarea placeholder={description} name="description" rows="10" onChange={this.handleChange} required />
+              </div>
 
-            <div className="form-section">
-              <label>Categories</label>
-              {this.makeCheckboxes()}
-            </div>
+              <div className="form-section">
+                <label>Categories</label>
+                {this.makeCheckboxes()}
+              </div>
 
-            <hr />
+              <hr />
 
-            <button type="submit">Submit</button>
-          </form>
-        </section>
-      </main>
+              <button type="submit">Submit</button>
+            </form>
+          </section>
+        </main>
+      </>
     );
   }
 }

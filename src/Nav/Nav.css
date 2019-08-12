@@ -1,0 +1,24 @@
+.app-title {
+  letter-spacing: .4rem;
+  font-weight: 200;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.app-title a, .admin-tasks a {
+  color: #000;
+  text-decoration: none;
+}
+.app-title a:hover,
+.admin-tasks a:hover {
+  text-decoration: underline;
+}
+
+.admin-tasks {
+  font-size: 0.9em;
+  font-weight: normal;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 18px;
+}

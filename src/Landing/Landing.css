@@ -1,9 +1,40 @@
-.app-title {
-  letter-spacing: .4rem;
-  font-weight: 200;
-  margin-bottom: 0;
-}
-
 header p {
   font-size: .9em;
+}
+
+.landing-hero {
+  background-image: url('https://images-prod.healthline.com/hlcmsresource/images/AN_images/swiss-chard-benefits-1296x728-feature.jpg');
+  background-repeat: none;
+  background-position: center;
+  background-size: cover;
+  margin-top: 0;
+}
+
+.landing-hero p {
+  text-align: center;
+}
+
+.browse-option {
+  display: inline-block;
+  padding: 18px;
+  background-color: #222;
+  border-radius: 1px;
+}
+
+.browse-option a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.browse-option a:hover {
+  text-decoration: underline;
+}
+
+
+.landing-links {
+  margin: 1em 0;
+}
+
+.browse-option:not(:first-child) {
+  margin-left: 12px;
 }

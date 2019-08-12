@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import './MarketList.css';
-import MarketCard from '../MarketCard/MarketCard';
+import React, { Component } from 'react'
+import Nav from '../Nav/Nav'
+import './MarketList.css'
+import MarketCard from '../MarketCard/MarketCard'
 // In production, markets info will
 // be retrieved from database 
 import dummyStore from '../dummy-store'
@@ -12,6 +13,7 @@ class MarketList extends Component {
     const marketsListHTML = dummyStore.markets.map(m =>
       <MarketCard
         key={m.id}
+        market_id={m.id}
         market_name={m.title}
         market_schedule={m.schedule}
         market_address={m.address}
@@ -20,15 +22,18 @@ class MarketList extends Component {
     );
 
     return (
-      <main role="main">
-        <header role="banner">
-          <h1>Farmer's Markets</h1>
-          <p>
-            <em>Within <a href="http://nothing.com">2 miles of 90025</a></em>
-          </p>
-        </header>
-        {marketsListHTML}
-      </main>
+      <>
+        <Nav />
+        <main role="main">
+          <header role="banner">
+            <h1>Farmer's Markets</h1>
+            {/* <p>
+              <em>Within <a href="http://nothing.com">2 miles of 90025</a></em>
+            </p> */}
+          </header>
+          {marketsListHTML}
+        </main>
+      </>
     );
   }
 }

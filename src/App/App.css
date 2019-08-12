@@ -10,11 +10,7 @@ nav, footer {
   padding: 1% 0;
   background-color: #aaa;
 }
-nav,
 
-nav, footer, .hero {
-  text-align: center;
-}
 nav {
   position: fixed;
   top: 0;
@@ -27,7 +23,11 @@ header {
   padding: 24px 15px;
 }
 
-.hero {
+main > header {
+  margin-top: 72px;
+}
+
+.hero, .landing-hero {
   padding: 12% 15px;
 }
 
