@@ -10,7 +10,11 @@ class Nav extends Component {
           <Link to="/">graze</Link>
         </div>
         <div className="admin-tasks">
-          <strong>admin</strong>&nbsp;|&nbsp;<Link to='/edit-market/456'>update market</Link>&nbsp;|&nbsp;<Link to="/create-vendor">new vendor</Link>
+          <strong>admin</strong>
+          {/* &nbsp;|&nbsp;<Link to='/edit-market/456'>update market</Link> */}
+          &nbsp;|&nbsp;<Link to='/new-product'>new product</Link>
+          &nbsp;|&nbsp;<Link to='/all-products'>all products</Link>
+          {/* &nbsp;|&nbsp;<Link to="/create-vendor">new vendor</Link> */}
         </div>
       </nav>
     );

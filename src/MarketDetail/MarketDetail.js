@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import Nav from '../Nav/Nav'
 import './MarketDetail.css'
-import dummyStore from '../dummy-store'
+import MarketDataContext from '../MarketDataContext'
 
 class MarketDetail extends Component {
+  static contextType = MarketDataContext;
   render() {
+    const { markets=[], vendors=[] } = this.context;
     let urlMarketId = this.props.match.params.marketId
-    let marketItem = dummyStore.markets.find(market => (market.id.toString() === urlMarketId.toString()))
+    let marketItem = markets.find(market => (market.id.toString() === urlMarketId.toString()))
     let content = (
       <>
         <Nav />
@@ -19,12 +21,16 @@ class MarketDetail extends Component {
       </>
     )
     if (marketItem) {
-      const { title, /*hero_image,*/ schedule, address, categories, vendor_list, description } = marketItem
-      const paragraphs = description.split('****')
+      //const { market_name, hero_image, schedule, market_location, categories, market_description } = marketItem
+      const { market_name, schedule, market_location, market_description } = marketItem
+      const paragraphs = market_description.split('****')
       const descriptionHTML = paragraphs.map((para, i) => <p key={i}>{para}</p>)
-      const cats = categories.join(', ')
-      const vendorList = vendor_list.map(vendor => {
-        return <li key={vendor.id}>{vendor.title} (Stall {vendor.stall})</li>
+      //const cats = categories.join(', ')
+      const marketVendors = vendors.filter(vendor => {
+        return vendor.market_id.toString() === urlMarketId.toString()
+      })
+      const vendorListHTML = marketVendors.map(vendor => {
+        return <li key={vendor.id}>{vendor.vendor_name} (Stall {vendor.market_stall})</li>
       });
 
       content = (
@@ -34,21 +40,21 @@ class MarketDetail extends Component {
             <header className="hero" role="banner"></header>
             <section>
               <header>
-                <h2>{title}</h2>
+                <h2>{market_name}</h2>
               </header>
               <div className="description">
                 <p><span className="detail-label">When:</span> {schedule}</p>
-                <p><span className="detail-label">Where:</span> {address} | <a href="https://maps.google.com">Map</a></p>
-                <p><span className="detail-label">Categories:</span> {cats}</p>
+                <p><span className="detail-label">Where:</span> {market_location} | <a href="https://maps.google.com">Map</a></p>
+                {/* <p><span className="detail-label">Categories:</span> {cats}</p> */}
               </div>
             </section>
             <section>
               <header>
-                <h3>Information</h3>
+                <h3>About This Market</h3>
               </header>
               {descriptionHTML}
               <ul className="vendor-list">
-                {vendorList}
+                {vendorListHTML}
               </ul>
             </section>
           </main>

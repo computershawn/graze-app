@@ -1,0 +1,6 @@
+.product-list-item {
+  margin-left: 24px;
+  max-width: 500px;
+  border-top: 1px solid #ccc;
+  padding: 1em;
+}

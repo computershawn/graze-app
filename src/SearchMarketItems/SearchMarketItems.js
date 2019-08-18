@@ -4,7 +4,7 @@ import Nav from '../Nav/Nav'
 import './SearchMarketItems.css'
 // In production, itemsListing info will
 // be retrieved from the database 
-import dummyStore from '../dummy-store'
+import MarketDataContext from '../MarketDataContext'
 
 
 
@@ -22,13 +22,66 @@ class SearchMarketItems extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  static contextType = MarketDataContext;
 
+  // handleSubmit(e) {
+  //   const { products=[], pricelist=[], vendors=[], markets=[] } = this.context;
+  //   let prevSearchTerm = this.state.searchTerm
+  //   // let searchResults = dummyStore.itemsListing.filter(item => {
+  //   //   let foods = Object.keys(item.foods)
+  //   //   return foods.includes(this.state.searchTerm.toLowerCase())
+  //   // })
+  //   let searchResults = products.filter(item => {
+  //     let foods = Object.keys(item.foods)
+  //     return foods.includes(this.state.searchTerm.toLowerCase())
+  //   })
+  //   let index = products.find(product => {
+  //     return product.product_name === this.state.searchTerm.toLowerCase()
+  //   })
+  //   console.log(index)
+
+  //   this.setState({
+  //     haveResults: true,
+  //     prevSearchTerm: prevSearchTerm,
+  //     searchResults: searchResults,
+  //     itemNotFound: searchResults.length === 0
+  //   })
+
+  //   e.preventDefault()
+  //   // Insert code to find searchTerm in the database >>>
+  //   // OR just retrieve all food items in database as JSON
+  //   // and search for the search term in that data
+  // }
   handleSubmit(e) {
+    const { products=[], pricelist=[], vendors=[], markets=[] } = this.context;
     let prevSearchTerm = this.state.searchTerm
-    let searchResults = dummyStore.itemsListing.filter(item => {
-      let foods = Object.keys(item.foods)
-      return foods.includes(this.state.searchTerm.toLowerCase())
+    let product = products.find(product => {
+      return product.product_name === this.state.searchTerm.toLowerCase()
     })
+    let index = product ? product.id : null
+    let searchResults = []
+    if(index) {
+      let list = pricelist.filter(item => {
+        return item.product_id.toString() === index.toString()
+      })
+      searchResults = list.map(item => {
+        let p = item.price
+        let u = item.units
+        let v = vendors.find(vendor => {
+          return vendor.id.toString() === item.vendor_id.toString()
+        })
+        let m = markets.find(market => {
+          return market.id.toString() === v.market_id.toString()
+        })
+        return {
+          price: `${p}/${u}`,
+          marketId: m.id,
+          market: m.market_name,
+          vendor: v.vendor_name,
+          stall: v.market_stall
+        }
+      })
+    }
 
     this.setState({
       haveResults: true,
@@ -38,9 +91,6 @@ class SearchMarketItems extends Component {
     })
 
     e.preventDefault()
-    // Insert code to find searchTerm in the database >>>
-    // OR just retrieve all food items in database as JSON
-    // and search for the search term in that data
   }
 
   handleChange(e) {
@@ -49,14 +99,14 @@ class SearchMarketItems extends Component {
   }
 
   formatSearchResults() {
-    const { prevSearchTerm } = this.state
-    let resultsHTML = this.state.searchResults.map(result => {
+    //const { prevSearchTerm } = this.state
+    let resultsHTML = this.state.searchResults.map((result, i) => {
       const linkTo = `/markets/${result.marketId}`
       return (
-        <article key={result.vendorName}>
-          <h4>{result.marketName} | <a href="http://nothing.com">Map</a></h4>
+        <article key={i}>
+          <h4>{result.market} | <a href="http://nothing.com">Map</a></h4>
           <p><em>
-            ${result.foods[prevSearchTerm]} at {result.vendorName} (Stall {result.vendorStall})<br />
+            ${result.price} at {result.vendor} (Stall {result.stall})<br />
           </em></p>
           <p><Link to={linkTo}>View this Market</Link></p>
         </article>
@@ -89,7 +139,7 @@ class SearchMarketItems extends Component {
             (haveResults && !itemNotFound) && (
               <section>
                 <div className="results-title">
-                  <p>Search results for <strong>{prevSearchTerm}</strong>:</p>
+                  <p>Search results for <strong>{prevSearchTerm}</strong></p>
                 </div>
                 <div>
                   {this.formatSearchResults()}
