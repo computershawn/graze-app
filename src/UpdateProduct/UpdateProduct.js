@@ -32,7 +32,8 @@ class UpdateProducts extends Component {
     }
     console.log(productToUpdate)
     this.context.updateProduct(productToUpdate)
-    this.props.history.push(`/all-products`);    
+    this.props.onUpdateProduct()
+    // this.props.history.push(`/all-products`);    
   }
 
   handleChange(e) {
@@ -41,16 +42,16 @@ class UpdateProducts extends Component {
   }
 
   render() {
-    const { products = [] } = this.context;
-    let urlProductId = this.props.match.params.productId
-    let productItem = products.find(product => (product.id.toString() === urlProductId.toString()))
+    const { products = [] } = this.context
+    const { product_id } = this.props
+    let productItem = products.find(product => (product.id.toString() === product_id.toString()))
     let content = (
       <>
         <Nav />
         <main>
           <section>
             <header></header>
-            <div>No product with id {urlProductId}</div>
+            <div>No product with id {product_id}</div>
           </section>
         </main>
       </>
@@ -65,7 +66,7 @@ class UpdateProducts extends Component {
               <header>
                 <h3>Update Product</h3>
               </header>
-              <form onSubmit={(e) => this.handleSubmit(e, urlProductId)}>
+              <form onSubmit={(e) => this.handleSubmit(e, product_id)}>
                 <div className="form-section">
                   <label htmlFor="prod-name">Name</label>
                   <input id="prod-name" type="text" name="productName" defaultValue={product_name} onChange={this.handleChange} required />

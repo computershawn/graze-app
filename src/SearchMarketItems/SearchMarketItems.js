@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../Nav/Nav'
 import './SearchMarketItems.css'
-// In production, itemsListing info will
-// be retrieved from the database 
 import MarketDataContext from '../MarketDataContext'
 
 
@@ -24,34 +22,6 @@ class SearchMarketItems extends Component {
   }
   static contextType = MarketDataContext;
 
-  // handleSubmit(e) {
-  //   const { products=[], pricelist=[], vendors=[], markets=[] } = this.context;
-  //   let prevSearchTerm = this.state.searchTerm
-  //   // let searchResults = dummyStore.itemsListing.filter(item => {
-  //   //   let foods = Object.keys(item.foods)
-  //   //   return foods.includes(this.state.searchTerm.toLowerCase())
-  //   // })
-  //   let searchResults = products.filter(item => {
-  //     let foods = Object.keys(item.foods)
-  //     return foods.includes(this.state.searchTerm.toLowerCase())
-  //   })
-  //   let index = products.find(product => {
-  //     return product.product_name === this.state.searchTerm.toLowerCase()
-  //   })
-  //   console.log(index)
-
-  //   this.setState({
-  //     haveResults: true,
-  //     prevSearchTerm: prevSearchTerm,
-  //     searchResults: searchResults,
-  //     itemNotFound: searchResults.length === 0
-  //   })
-
-  //   e.preventDefault()
-  //   // Insert code to find searchTerm in the database >>>
-  //   // OR just retrieve all food items in database as JSON
-  //   // and search for the search term in that data
-  // }
   handleSubmit(e) {
     const { products=[], pricelist=[], vendors=[], markets=[] } = this.context;
     let prevSearchTerm = this.state.searchTerm
@@ -99,7 +69,6 @@ class SearchMarketItems extends Component {
   }
 
   formatSearchResults() {
-    //const { prevSearchTerm } = this.state
     let resultsHTML = this.state.searchResults.map((result, i) => {
       const linkTo = `/markets/${result.marketId}`
       return (

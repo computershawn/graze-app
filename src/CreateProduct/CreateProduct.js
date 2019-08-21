@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import Nav from '../Nav/Nav'
 import MarketDataContext from '../MarketDataContext';
 import './CreateProduct.css';
-// In production, categories and market name
-// info will be retrieved from database 
-//import dummyStore from '../dummy-store'
 
 const productCats = ['fruit',
   'vegetable',
@@ -13,17 +10,11 @@ const productCats = ['fruit',
   'meat',
   'seafood',
   'other']
-// Here is the psql command that would be used to get eh productCats array
+// Here is the psql command that would be used to get the productCats array
 // select t.typname, e.enumlabel from pg_type t, pg_enum e where t.oid = e.enumtypid;
 // Ref: http://postgresguide.com/sexy/enums.html
 
 class CreateProduct extends Component {
-  static defaultProps = {
-    history: {
-      push: () => { }
-    }
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +37,7 @@ class CreateProduct extends Component {
       kind: e.target['productCat'].value,
     }
     this.context.addProduct(newProduct)
-    this.props.history.push(`/all-products`);    
+    this.props.onCreateProduct()
   }
 
   handleChange(e) {

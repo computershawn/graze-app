@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import MarketList from '../MarketList/MarketList'
 import MarketDetail from '../MarketDetail/MarketDetail'
-import EditMarketDetail from '../EditMarketDetail/EditMarketDetail'
-import CreateVendor from '../CreateVendor/CreateVendor'
 import CreateProduct from '../CreateProduct/CreateProduct'
 import ProductList from '../ProductList/ProductList'
 import UpdateProduct from '../UpdateProduct/UpdateProduct'
@@ -11,6 +9,9 @@ import SearchMarketItems from '../SearchMarketItems/SearchMarketItems'
 import Landing from '../Landing/Landing'
 import SiteFooter from '../SiteFooter/SiteFooter'
 import MarketDataContext from '../MarketDataContext'
+import LoginPage from '../LoginPage/LoginPage'
+import AdminPage from '../AdminPage/AdminPage'
+import TokenService from '../services/token-service'
 import config from '../config'
 import './App.css'
 
@@ -123,7 +124,6 @@ class App extends Component {
       combinedData["pricelist"] = values[1];
       combinedData["vendors"] = values[2];
       combinedData["markets"] = values[3];
-
       return combinedData;
     }).then(data => {
       this.setMarketData(data)
@@ -147,11 +147,65 @@ class App extends Component {
           <Route exact path='/markets' component={MarketList} />
           <Route path='/markets/:marketId' component={MarketDetail} />
           <Route path='/search' component={SearchMarketItems} />
-          <Route path='/edit-market/:marketId' component={EditMarketDetail} />
-          <Route path='/create-vendor' component={CreateVendor} />
-          <Route path='/new-product' component={CreateProduct} />
-          <Route path='/all-products' component={ProductList} />
-          <Route path='/update/:productId' component={UpdateProduct} />
+
+          <Route
+            path={'/login'}
+            render={({ history }) => (
+              TokenService.hasAuthToken()
+                ? <Redirect to={'/'} />
+                : <LoginPage onLoginSuccess={() => history.push('/manage')} />
+            )} />
+          {
+            TokenService.hasAuthToken()
+              ? <>
+                <Route path={'/manage'} component={AdminPage} />
+                <Route
+                  path={'/new-product'}
+                  render={({ history }) => (
+                    <CreateProduct onCreateProduct={() => history.push('/all-products')} />
+                  )} />
+                <Route
+                  path={'/update/:productId'}
+                  render={(routerProps) => {
+                    let product_id = routerProps.match.params.productId
+                    return (
+                      <UpdateProduct product_id={product_id} onUpdateProduct={() => routerProps.history.push('/all-products')} />
+                    )
+                  }} />
+                <Route path={'/all-products'} component={ProductList} />
+              </>
+              : <Redirect to={'/'} />
+          }
+          {/* <Route
+            path={'/manage'}
+            render={() => (
+              TokenService.hasAuthToken()
+                ? <AdminPage />
+                : <Redirect to={'/'} />
+            )} />
+          <Route
+            path={'/new-product'}
+            render={({ history }) => (
+              TokenService.hasAuthToken()
+                ? <CreateProduct onCreateProduct={() => history.push('/all-products')} />
+                : <Redirect to={'/'} />
+            )} />
+          <Route
+            path={'/update/:productId'}
+            render={(routerProps) => {
+             let product_id = routerProps.match.params.productId
+              return (
+              TokenService.hasAuthToken()
+                ? <UpdateProduct product_id={product_id} onUpdateProduct={() => routerProps.history.push('/all-products')}/>
+                : <Redirect to={'/'} />
+            )}} />
+          <Route
+            path={'/all-products'}
+            render={() => (
+              TokenService.hasAuthToken()
+                ? <ProductList />
+                : <Redirect to={'/'} />
+            )} /> */}
           <SiteFooter />
         </>
       </MarketDataContext.Provider>
