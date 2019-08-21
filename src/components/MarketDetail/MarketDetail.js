@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Nav from '../Nav/Nav'
 import './MarketDetail.css'
-import MarketDataContext from '../MarketDataContext'
+import MarketDataContext from '../../MarketDataContext'
 
 class MarketDetail extends Component {
   static contextType = MarketDataContext;
@@ -25,7 +25,6 @@ class MarketDetail extends Component {
       const { market_name, schedule, market_location, market_description } = marketItem
       const paragraphs = market_description.split('****')
       const descriptionHTML = paragraphs.map((para, i) => <p key={i}>{para}</p>)
-      //const cats = categories.join(', ')
       const marketVendors = vendors.filter(vendor => {
         return vendor.market_id.toString() === urlMarketId.toString()
       })

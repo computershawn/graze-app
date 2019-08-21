@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Nav from '../Nav/Nav'
 import './MarketList.css'
 import MarketCard from '../MarketCard/MarketCard'
-import MarketDataContext from '../MarketDataContext'
+import MarketDataContext from '../../MarketDataContext'
 
 
 class MarketList extends Component {

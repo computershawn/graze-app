@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Nav from '../Nav/Nav'
 import './ProductList.css'
 import ProductListItem from '../ProductListItem/ProductListItem'
-import MarketDataContext from '../MarketDataContext'
+import MarketDataContext from '../../MarketDataContext'
 
 
 class ProductList extends Component {

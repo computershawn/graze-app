@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders empty given no tabs 1`] = `
+<Fragment>
+  <Nav />
+  <main>
+    <header>
+      <h1>
+        Freshness Finder
+      </h1>
+    </header>
+    <section>
+      <form
+        onSubmit={[Function]}
+      >
+        <div
+          className="form-section"
+        >
+          <label
+            htmlFor="searchTerm"
+          >
+            What are you shopping for today?
+          </label>
+          <input
+            name="searchTerm"
+            onChange={[Function]}
+            placeholder="Apples"
+            required={true}
+            type="text"
+          />
+        </div>
+        <button
+          type="submit"
+        >
+          Find It!
+        </button>
+      </form>
+    </section>
+  </main>
+</Fragment>
+`;

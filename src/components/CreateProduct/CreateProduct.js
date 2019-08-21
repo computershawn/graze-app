@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Nav from '../Nav/Nav'
-import MarketDataContext from '../MarketDataContext';
+import MarketDataContext from '../../MarketDataContext';
 import './CreateProduct.css';
 
 const productCats = ['fruit',

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Nav from '../Nav/Nav'
 import './UpdateProduct.css'
-import MarketDataContext from '../MarketDataContext'
+import MarketDataContext from '../../MarketDataContext'
 
 class UpdateProducts extends Component {
   static defaultProps = {

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MarketDetail component Renders quite nicely 1`] = `
+<Fragment>
+  <Nav />
+  <main>
+    <section>
+      <header />
+      <div>
+        No market with id 
+        1
+      </div>
+    </section>
+  </main>
+</Fragment>
+`;
