@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TokenService from '../services/token-service'
+import TokenService from '../../services/token-service'
 import './LoginPage.css';
 import Nav from '../Nav/Nav'
 

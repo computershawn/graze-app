@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import MarketDataContext from '../MarketDataContext'
-import config from '../config'
+import MarketDataContext from '../../MarketDataContext'
+import config from '../../config'
 import './ProductListItem.css'
 
 function deleteProductRequest(productId, productDeleteCallbackFunc) {
