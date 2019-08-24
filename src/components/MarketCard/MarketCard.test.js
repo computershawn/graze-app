@@ -10,7 +10,7 @@ it('renders without crashing', () => {
     market_id: 1,
     market_name: 'Market Name',
     market_schedule: 'Monday thru Friday 9am-5pm',
-    market_address: '1234 5th Street in Town City',
+    market_location: '1234 5th Street in Town City',
     market_summary: 'It is a market that is all'
   }
   ReactDOM.render(

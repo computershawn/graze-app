@@ -3,9 +3,11 @@
 exports[`renders empty given no tabs 1`] = `
 <footer>
   © 
-  <strong>
+  <span
+    className="app-title-footer"
+  >
     graze
-  </strong>
+  </span>
    
   2019
 </footer>

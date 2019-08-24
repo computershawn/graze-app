@@ -6,15 +6,17 @@ exports[`renders empty given no tabs 1`] = `
   <main>
     <header>
       <h1>
-        Freshness Finder
+        Search
       </h1>
     </header>
-    <section>
+    <section
+      className="search-container"
+    >
       <form
         onSubmit={[Function]}
       >
         <div
-          className="form-section"
+          className="form-section search-field"
         >
           <label
             htmlFor="searchTerm"
@@ -24,7 +26,7 @@ exports[`renders empty given no tabs 1`] = `
           <input
             name="searchTerm"
             onChange={[Function]}
-            placeholder="Apples"
+            placeholder="apple"
             required={true}
             type="text"
           />

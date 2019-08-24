@@ -3,7 +3,9 @@
 exports[`MarketDetail component Renders quite nicely 1`] = `
 <Fragment>
   <Nav />
-  <main>
+  <main
+    className="market-detail-page"
+  >
     <section>
       <header />
       <div>
