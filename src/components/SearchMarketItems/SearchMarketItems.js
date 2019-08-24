@@ -23,20 +23,21 @@ class SearchMarketItems extends Component {
   static contextType = MarketDataContext;
 
   handleSubmit(e) {
-    const { products=[], pricelist=[], vendors=[], markets=[] } = this.context;
+    e.preventDefault()
+    const { products = [], pricelist = [], vendors = [], markets = [] } = this.context;
     let prevSearchTerm = this.state.searchTerm
     let product = products.find(product => {
       return product.product_name === this.state.searchTerm.toLowerCase()
     })
     let index = product ? product.id : null
     let searchResults = []
-    if(index) {
+    let searchResultsOrganized = []
+    if (index) {
       let list = pricelist.filter(item => {
         return item.product_id.toString() === index.toString()
       })
       searchResults = list.map(item => {
-        let p = item.price
-        let u = item.units
+        let price = `${item.price}/${item.units}`
         let v = vendors.find(vendor => {
           return vendor.id.toString() === item.vendor_id.toString()
         })
@@ -44,23 +45,47 @@ class SearchMarketItems extends Component {
           return market.id.toString() === v.market_id.toString()
         })
         return {
-          price: `${p}/${u}`,
+          price: price,
           marketId: m.id,
-          market: m.market_name,
+          market_name: m.market_name,
           vendor: v.vendor_name,
           stall: v.market_stall
         }
       })
+
+      let uniqueMarkets = []
+      list.forEach(item => {
+        let v = vendors.find(vendor => {
+          return vendor.id.toString() === item.vendor_id.toString()
+        })
+        let m = markets.find(market => {
+          return market.id.toString() === v.market_id.toString()
+        })
+        if (!uniqueMarkets.includes(m.market_name)) {
+          uniqueMarkets.push(m.market_name)
+        }
+      })
+
+      searchResultsOrganized = uniqueMarkets.map(market => {
+        const thisMarketVendors = searchResults.filter(item => {
+          return item.market_name === market
+        })
+        const id = thisMarketVendors[0].marketId;
+        return {
+          market_name: market,
+          id: id,
+          thisMarketVendors: thisMarketVendors
+        }
+      })
+      // This way of sorting and filtering the list is hella convoluted but ok
     }
 
     this.setState({
       haveResults: true,
       prevSearchTerm: prevSearchTerm,
-      searchResults: searchResults,
+      searchResults: searchResultsOrganized,
       itemNotFound: searchResults.length === 0
     })
-
-    e.preventDefault()
   }
 
   handleChange(e) {
@@ -70,14 +95,15 @@ class SearchMarketItems extends Component {
 
   formatSearchResults() {
     let resultsHTML = this.state.searchResults.map((result, i) => {
-      const linkTo = `/markets/${result.marketId}`
+      const marketLink = `/markets/${result.id}`
       return (
         <article key={i}>
-          <h4>{result.market} | <a href="http://nothing.com">Map</a></h4>
-          <p><em>
-            ${result.price} at {result.vendor} (Stall {result.stall})<br />
-          </em></p>
-          <p><Link to={linkTo}>View this Market</Link></p>
+          <h3><Link to={marketLink}>{result.market_name}</Link></h3>
+          {result.thisMarketVendors.map(v => {
+            return (<p key={v.vendor}><em>
+              ${v.price} at {v.vendor} (Stall {v.stall})
+            </em></p>)
+          })}
         </article>
       )
     })
@@ -91,14 +117,14 @@ class SearchMarketItems extends Component {
         <Nav />
         <main>
           <header>
-            <h1>Freshness Finder</h1>
+            <h1>Search</h1>
           </header>
 
-          <section>
+          <section className="search-container">
             <form onSubmit={this.handleSubmit}>
-              <div className="form-section">
+              <div className="form-section search-field">
                 <label htmlFor="searchTerm">What are you shopping for today?</label>
-                <input type="text" name="searchTerm" placeholder='Apples' onChange={this.handleChange} required />
+                <input type="text" name="searchTerm" placeholder='apple' onChange={this.handleChange} required />
               </div>
               <button type="submit">Find It!</button>
             </form>
@@ -106,11 +132,12 @@ class SearchMarketItems extends Component {
 
           {
             (haveResults && !itemNotFound) && (
-              <section>
+              <section className="results-container">
+              <hr />
                 <div className="results-title">
                   <p>Search results for <strong>{prevSearchTerm}</strong></p>
                 </div>
-                <div>
+                <div className="results-area">
                   {this.formatSearchResults()}
                 </div>
               </section>

@@ -13,7 +13,7 @@ class AdminPage extends Component {
           <header>
             <h1>Manage Products</h1>
           </header>
-          <section>
+          <section className="admin-page-links">
             <h4>
               <Link to='/new-product'>New Product</Link>
             </h4>

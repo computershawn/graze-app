@@ -1,0 +1,31 @@
+.search-field label,
+.search-field input {
+  font-size: 1.2em;
+}
+
+.search-field label {
+  margin-bottom: 0.5em;
+}
+
+.search-container {
+  margin-bottom: 2em;
+}
+.results-container {
+  margin-bottom: 48px;
+}
+
+.results-area article {
+  padding: 15px 0;
+}
+
+.results-area article p {
+  text-indent: 0.5em;
+}
+
+.results-area a {
+  text-decoration: none;
+}
+
+.results-area a:hover {
+  text-decoration: underline;
+}

@@ -82,15 +82,17 @@ class App extends Component {
         return res
       })
       .then(data => {
-        console.log(p)
-        let oldProductsState = this.state.products
-        let newProductsState = oldProductsState.map(item => {
-          if (item.id.toString() === p.id) {
-            return {
-              id: parseInt(p.id),
-              product_description: p.product_description,
-              product_name: p.product_name
-            }
+        // let newProductsState = this.state.products.slice()
+        // let index = newProductsState.findIndex(item => {
+        //   return item.id.toString() === p.id
+        // })
+        // newProductsState[index]['product_description'] = p.product_description
+        // newProductsState[index]['product_name'] = p.product_name
+        // this.setState({ products: newProductsState })
+        // We can do the same thing, with spread syntax:
+        let newProductsState = this.state.products.map(item => {
+          if(item.id.toString() === p.id) {
+            return {...item, product_description: p.product_description, product_name: p.product_name}
           }
           return item
         })
@@ -176,36 +178,6 @@ class App extends Component {
               </>
               : <Redirect to={'/'} />
           }
-          {/* <Route
-            path={'/manage'}
-            render={() => (
-              TokenService.hasAuthToken()
-                ? <AdminPage />
-                : <Redirect to={'/'} />
-            )} />
-          <Route
-            path={'/new-product'}
-            render={({ history }) => (
-              TokenService.hasAuthToken()
-                ? <CreateProduct onCreateProduct={() => history.push('/all-products')} />
-                : <Redirect to={'/'} />
-            )} />
-          <Route
-            path={'/update/:productId'}
-            render={(routerProps) => {
-             let product_id = routerProps.match.params.productId
-              return (
-              TokenService.hasAuthToken()
-                ? <UpdateProduct product_id={product_id} onUpdateProduct={() => routerProps.history.push('/all-products')}/>
-                : <Redirect to={'/'} />
-            )}} />
-          <Route
-            path={'/all-products'}
-            render={() => (
-              TokenService.hasAuthToken()
-                ? <ProductList />
-                : <Redirect to={'/'} />
-            )} /> */}
           <SiteFooter />
         </>
       </MarketDataContext.Provider>

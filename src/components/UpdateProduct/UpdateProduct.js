@@ -30,10 +30,8 @@ class UpdateProducts extends Component {
       product_name: e.target['productName'].value,
       product_description: e.target['productDesc'].value
     }
-    console.log(productToUpdate)
     this.context.updateProduct(productToUpdate)
     this.props.onUpdateProduct()
-    // this.props.history.push(`/all-products`);    
   }
 
   handleChange(e) {

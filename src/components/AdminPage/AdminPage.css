@@ -1,0 +1,7 @@
+.admin-page-links a {
+  text-decoration: none;
+}
+
+.admin-page-links a:hover {
+  text-decoration: underline;
+}

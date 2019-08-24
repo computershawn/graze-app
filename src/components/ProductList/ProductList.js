@@ -28,7 +28,9 @@ class ProductList extends Component {
           <header role="banner">
             <h1>Products</h1>
           </header>
-          {productsListHTML}
+          <div className="all-products-list">
+            {productsListHTML}
+          </div>
         </main>
       </>
     );

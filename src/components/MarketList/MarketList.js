@@ -8,14 +8,14 @@ import MarketDataContext from '../../MarketDataContext'
 class MarketList extends Component {
   static contextType = MarketDataContext;
   render() {
-    const { markets=[] } = this.context;
+    const { markets = [] } = this.context;
     const marketsListHTML = markets.map(m =>
-        <MarketCard
+      <MarketCard
         key={m.id}
         market_id={m.id}
         market_name={m.market_name}
         market_schedule={m.schedule}
-        market_address={m.market_location}
+        market_location={m.market_location}
         market_summary={m.summary}
       />
     );
@@ -30,7 +30,9 @@ class MarketList extends Component {
               <em>Within <a href="http://nothing.com">2 miles of 90025</a></em>
             </p> */}
           </header>
-          {marketsListHTML}
+          <div className="markets-list">
+            {marketsListHTML}
+          </div>
         </main>
       </>
     );

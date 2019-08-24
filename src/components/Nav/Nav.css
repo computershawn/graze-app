@@ -6,11 +6,13 @@
   justify-content: center;
 }
 
-.app-title a, .admin-tasks a {
-  color: #000;
+.admin-tasks a {
+  color: #353535;
   text-decoration: none;
 }
-.app-title a:hover,
+.admin-tasks a.active {
+  font-weight: 500;
+}
 .admin-tasks a:hover {
   text-decoration: underline;
 }
@@ -19,6 +21,30 @@
   font-size: 0.9em;
   font-weight: normal;
   display: flex;
-  justify-content: flex-end;
-  margin-right: 18px;
+  justify-content: space-between;
+  margin: 76px 18px 6px;
+}
+
+nav .app-title a {
+  text-decoration: none;
+  color: #ebffd7;
+  font-family: 'Ruthie';
+  font-size: 1.2em;
+}
+
+nav .app-title {
+  font-size: 1.5em;
+}
+
+nav {
+  background-color: #181818;
+  padding: 1em 0;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }

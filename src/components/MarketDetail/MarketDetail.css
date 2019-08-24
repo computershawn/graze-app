@@ -1,7 +1,5 @@
 .hero {
-  /* background-image: url('https://via.placeholder.com/960x540.png?text=hero+image'); */
-  background-image: url('https://images.unsplash.com/photo-1498579397066-22750a3cb424?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80');
-  background-repeat: none;
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
@@ -12,9 +10,28 @@
 }
 
 .vendor-list li {
-  text-transform: capitalize
+  text-transform: capitalize;
+  margin-bottom: 0.5em;
 }
 
 .detail-label {
   font-weight: 600;
+}
+
+.market-info {
+  max-width: 660px;
+}
+
+.market-detail-page .market-info {
+  margin-bottom: 72px;
+}
+
+.market-info p {
+  margin: 0;
+}
+
+.market-info .vendor-list {
+  margin-top: 0.5em;
+  padding-left: 0;
+  list-style-type: none;
 }

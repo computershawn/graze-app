@@ -1,24 +1,31 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Nav from '../Nav/Nav'
 import './Landing.css';
+import TokenService from '../../services/token-service'
+
+
+
 
 class Landing extends Component {
+  handleLogoutClick = () => {
+    TokenService.clearAuthToken()
+  }
   render() {
+    const adminLinks = TokenService.hasAuthToken()
+      ? <><Link to='/manage'>Manage Products</Link>&nbsp;|&nbsp;<Link onClick={this.handleLogoutClick} to='/'>Sign Out</Link></>
+      : <Link to='/login'>Sign In</Link>
     return (
       <>
-        <Nav />
-        <main>
+        <main className="landing-page-content">
           <header className="landing-hero" role="banner">
             <h1 className="app-title">graze</h1>
-            <p className="app-subtitle"><em>Eat Like a Local</em></p>
+            {/* <p className="app-subtitle"><em>Eat Like a Local</em></p> */}
           </header>
-          <section>
+          <section className="landing-info">
             <header>
-              <h4>Looking for some chard?</h4>
+              <h3>Looking for some chard?</h3>
             </header>
-            <p>Graze locates the freshest fruits, vegetables and meats at more than 400 farmer's markets in and around Los Angeles.</p>
-            {/* <button type='submit'>Start Browsing Now</button> */}
+            <p className="intro">Graze helps you locate the freshest fruits, vegetables and meats at more than 400 farmer's markets in Los Angeles. Click 'Search' below to find out which farms deliver perfect persimmons. We'll tell you the price, and where to find them. To get information about a specific farmer's market, click 'Browse Markets'.</p>
             <div className="landing-links">
               <div className="browse-option">
                 <Link to="/search">Search</Link>
@@ -27,8 +34,15 @@ class Landing extends Component {
                 <Link to="/markets">Browse Markets</Link>
               </div>
             </div>
-            {/* <br /><br />
-            <p><a href="http://nothing.com">Login</a> | <a href="http://nothing.com">Register</a></p> */}
+          </section>
+          {/* {
+            !TokenService.hasAuthToken() &&
+            (<section className="landing-login-link">
+              <p><Link to="/login">Sign In</Link></p>
+            </section>)
+          } */}
+          <section className="landing-login-link">
+            <p>{adminLinks}</p>
           </section>
         </main>
       </>

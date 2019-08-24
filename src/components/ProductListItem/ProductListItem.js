@@ -48,7 +48,7 @@ export default class ProductListItem extends Component {
     return (
       <MarketDataContext.Consumer>
         {(context) => (
-          <div className="product-list-item">
+          <article className="product-list-item">
             <h2>
               {this.props.name}
             </h2>
@@ -70,7 +70,7 @@ export default class ProductListItem extends Component {
               Delete
             </button>
             </p>
-          </div>
+          </article>
         )}
       </MarketDataContext.Consumer>
     )

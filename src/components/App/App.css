@@ -1,3 +1,5 @@
+/* ------------------------------------*/
+/* General Styles          */
 * {
   box-sizing: border-box;
   font-family: "Open Sans",
@@ -6,54 +8,37 @@
   line-height: 1.4;
 }
 
-nav, footer {
-  padding: 1% 0;
-  background-color: #aaa;
+main {
+  background: #fefefe;
 }
 
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
-
+section,
 header {
-  padding: 24px 15px;
+  padding: 0 30px;
 }
 
-main > header {
-  margin-top: 72px;
+section > header {
+  padding: 0;
 }
+
+/* .hero, .landing-hero {
+  padding: 12% 15px;
+} */
 
 .hero, .landing-hero {
-  padding: 12% 15px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.landing-hero h1 {
+  margin-top: 0;
+}
+
 
 article {
-  min-height: 200px;
   padding: 30px 15px;
-  background-color: #d2d2d2;
-}
-
-article:nth-child(even) {
-  background-color: #ddd;
-}
-
-section {
-  min-height: 200px;
-  padding: 30px 15px;
-  background-color: #d2d2d2;
-}
-
-section:nth-child(even) {
-  background-color: #ddd;
-}
-
-p {
-  margin: 0 auto;
-  max-width: 650px;
 }
 
 p + p {
@@ -64,7 +49,21 @@ caption {
   display: block;
 }
 
+address {
+  display: inline-block;
+}
 
+button {
+  border-radius: 2px;
+  padding: .5em 1em;
+  font-size: 0.8em;
+}
+
+.app-title {
+  font-style: italic;
+}
+/* /END General Styles     */
+/* ------------------------------------*/
 
 
 /* ------------------------------------*/
@@ -114,17 +113,25 @@ label {
 /* ------------------------------------*/
 
 
+/* ------------------------------------*/
+/* Market Info Styles          */
+.market-info h5 {
+  margin-bottom: 0;
+}
+/* /END Market Info Styles     */
+/* ------------------------------------*/
+
 
 
 /* ------------------------------------*/
 /* Responsive Styles                   */
 @media screen and (min-width: 960px) {
-  p {
-    margin: 0 auto;
-    max-width: 100%;
+  .hero, .landing-hero {
+    height: 400px;
   }
-  section > div {
-    max-width: 1000px;
+  section,
+  header {
+    padding: 0 15px;
   }  
 }
 /* /END Responsive Styles              */

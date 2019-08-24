@@ -9,7 +9,7 @@ class SiteFooter extends Component {
   
   render() {
     return (
-    <footer>&copy; <strong>graze</strong> {this.copyrightYear()}</footer>
+    <footer>&copy; <span className="app-title-footer">graze</span> {this.copyrightYear()}</footer>
     );
   }
 }
