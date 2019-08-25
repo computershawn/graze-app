@@ -19,7 +19,6 @@ class Landing extends Component {
         <main className="landing-page-content">
           <header className="landing-hero" role="banner">
             <h1 className="app-title">graze</h1>
-            {/* <p className="app-subtitle"><em>Eat Like a Local</em></p> */}
           </header>
           <section className="landing-info">
             <header>
@@ -35,14 +34,9 @@ class Landing extends Component {
               </div>
             </div>
           </section>
-          {/* {
-            !TokenService.hasAuthToken() &&
-            (<section className="landing-login-link">
-              <p><Link to="/login">Sign In</Link></p>
-            </section>)
-          } */}
           <section className="landing-login-link">
             <p>{adminLinks}</p>
+            <p><small>| <strong>username:</strong> admin | <strong>password:</strong> unicorns999 |</small></p>
           </section>
         </main>
       </>
