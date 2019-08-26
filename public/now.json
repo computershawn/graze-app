@@ -2,13 +2,21 @@
   "version": 2,
   "name": "graze-app",
   "routes": [
-      {
-        "src": "^/static/(.*)",
-        "dest": "/static/$1"
-      },
-      {
-        "src": ".*",
-        "dest": "/index.html"
-      }
+    {
+      "src": "^/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "^/graze-favicon.ico$",
+      "dest": "/graze-favicon.ico"
+    },
+    {
+      "src": "^/manifest.json$",
+      "dest": "/manifest.json"
+    },
+    {
+      "src": ".*",
+      "dest": "/index.html"
+    }
   ]
 }
