@@ -82,14 +82,6 @@ class App extends Component {
         return res
       })
       .then(data => {
-        // let newProductsState = this.state.products.slice()
-        // let index = newProductsState.findIndex(item => {
-        //   return item.id.toString() === p.id
-        // })
-        // newProductsState[index]['product_description'] = p.product_description
-        // newProductsState[index]['product_name'] = p.product_name
-        // this.setState({ products: newProductsState })
-        // We can do the same thing, with spread syntax:
         let newProductsState = this.state.products.map(item => {
           if(item.id.toString() === p.id) {
             return {...item, product_description: p.product_description, product_name: p.product_name}
@@ -132,6 +124,10 @@ class App extends Component {
     })
   }
 
+  jumpToPage(historyObject, page) {
+    historyObject.push(page)
+  }
+
   render() {
     const contextValue = {
       products: this.state.products,
@@ -155,7 +151,8 @@ class App extends Component {
             render={({ history }) => (
               TokenService.hasAuthToken()
                 ? <Redirect to={'/'} />
-                : <LoginPage onLoginSuccess={() => history.push('/manage')} />
+                : <LoginPage onLoginSuccess={() => this.jumpToPage(history, '/manage')} />
+                // : <LoginPage onLoginSuccess={() => history.push('/manage')} />
             )} />
           {
             TokenService.hasAuthToken()
