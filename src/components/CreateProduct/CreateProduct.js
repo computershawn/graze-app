@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Nav from '../Nav/Nav'
 import MarketDataContext from '../../MarketDataContext';
 import './CreateProduct.css';
@@ -37,7 +38,7 @@ class CreateProduct extends Component {
       kind: e.target['productCat'].value,
     }
     this.context.addProduct(newProduct)
-    this.props.onCreateProduct()
+    this.props.history.push('/all-products')
   }
 
   handleChange(e) {
@@ -82,10 +83,9 @@ class CreateProduct extends Component {
                   })}
                 </select>
               </div>
-
               <hr />
-
               <button type="submit">Submit</button>
+              <Link className="cancel-action" to='/all-products'>Cancel</Link>              
             </form>
           </section>
         </main>

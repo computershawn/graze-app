@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import MarketList from '../MarketList/MarketList'
 import MarketDetail from '../MarketDetail/MarketDetail'
 import CreateProduct from '../CreateProduct/CreateProduct'
@@ -11,7 +11,8 @@ import SiteFooter from '../SiteFooter/SiteFooter'
 import MarketDataContext from '../../MarketDataContext'
 import LoginPage from '../LoginPage/LoginPage'
 import AdminPage from '../AdminPage/AdminPage'
-import TokenService from '../../services/token-service'
+import PrivateRoute from '../Utils/PrivateRoute'
+import PublicOnlyRoute from '../Utils/PublicOnlyRoute'
 import config from '../../config'
 import './App.css'
 
@@ -83,8 +84,8 @@ class App extends Component {
       })
       .then(data => {
         let newProductsState = this.state.products.map(item => {
-          if(item.id.toString() === p.id) {
-            return {...item, product_description: p.product_description, product_name: p.product_name}
+          if (item.id.toString() === p.id) {
+            return { ...item, product_description: p.product_description, product_name: p.product_name }
           }
           return item
         })
@@ -124,10 +125,6 @@ class App extends Component {
     })
   }
 
-  jumpToPage(historyObject, page) {
-    historyObject.push(page)
-  }
-
   render() {
     const contextValue = {
       products: this.state.products,
@@ -146,35 +143,31 @@ class App extends Component {
           <Route path='/markets/:marketId' component={MarketDetail} />
           <Route path='/search' component={SearchMarketItems} />
 
-          <Route
+          <PublicOnlyRoute
             path={'/login'}
-            render={({ history }) => (
-              TokenService.hasAuthToken()
-                ? <Redirect to={'/'} />
-                : <LoginPage onLoginSuccess={() => this.jumpToPage(history, '/manage')} />
-                // : <LoginPage onLoginSuccess={() => history.push('/manage')} />
-            )} />
-          {
-            TokenService.hasAuthToken()
-              ? <>
-                <Route path={'/manage'} component={AdminPage} />
-                <Route
-                  path={'/new-product'}
-                  render={({ history }) => (
-                    <CreateProduct onCreateProduct={() => history.push('/all-products')} />
-                  )} />
-                <Route
-                  path={'/update/:productId'}
-                  render={(routerProps) => {
-                    let product_id = routerProps.match.params.productId
-                    return (
-                      <UpdateProduct product_id={product_id} onUpdateProduct={() => routerProps.history.push('/all-products')} />
-                    )
-                  }} />
-                <Route path={'/all-products'} component={ProductList} />
-              </>
-              : <Redirect to={'/'} />
-          }
+            component={LoginPage}
+          />
+
+          <PrivateRoute
+            path={'/manage'}
+            component={AdminPage}
+          />
+
+          <PrivateRoute
+            path={'/all-products'}
+            component={ProductList}
+          />
+
+          <PrivateRoute
+            path={'/new-product'}
+            component={CreateProduct}
+          />
+
+          <PrivateRoute
+            path={'/update/:productId'}
+            component={UpdateProduct}
+          />
+
           <SiteFooter />
         </>
       </MarketDataContext.Provider>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Nav from '../Nav/Nav'
 import './UpdateProduct.css'
 import MarketDataContext from '../../MarketDataContext'
@@ -31,7 +32,7 @@ class UpdateProducts extends Component {
       product_description: e.target['productDesc'].value
     }
     this.context.updateProduct(productToUpdate)
-    this.props.onUpdateProduct()
+    this.props.history.push('/all-products')
   }
 
   handleChange(e) {
@@ -41,7 +42,7 @@ class UpdateProducts extends Component {
 
   render() {
     const { products = [] } = this.context
-    const { product_id } = this.props
+    const product_id = this.props.match.params.productId
     let productItem = products.find(product => (product.id.toString() === product_id.toString()))
     let content = (
       <>
@@ -60,6 +61,9 @@ class UpdateProducts extends Component {
         <>
           <Nav />
           <main>
+            <section className="product-updated hidden">
+              <p><small>Product has been updated.</small></p>
+            </section>
             <section>
               <header>
                 <h3>Update Product</h3>
@@ -75,6 +79,7 @@ class UpdateProducts extends Component {
                 </div>
                 <hr />
                 <button type="submit">Submit</button>
+                <Link className="cancel-action" to='/all-products'>Cancel</Link>              
               </form>
             </section>
           </main>
