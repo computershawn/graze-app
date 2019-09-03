@@ -59,6 +59,12 @@ button {
   font-size: 0.8em;
 }
 
+.cancel-action {
+  font-size: 0.8em;
+  padding: 0 .5em;
+  text-decoration: none;
+}
+
 .app-title {
   font-style: italic;
 }

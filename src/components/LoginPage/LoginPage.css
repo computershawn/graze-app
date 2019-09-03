@@ -1,0 +1,10 @@
+.wrong-login-info {
+  margin: 0;
+  color: #f4511e;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.hidden {
+  opacity: 0;
+}

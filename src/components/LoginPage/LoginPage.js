@@ -25,8 +25,8 @@ export default class LoginPage extends Component {
   }
 
   handleSubmitBasicAuth(e) {
-    // To save time, this handleSubmitBasicAuth stuff was not
-    // written correctly. To do it the right way, see the
+    // To save time, this handleSubmitBasicAuth function was
+    // not written correctly. To do it the right way, see the
     // Protected Endpoints chapter here:
     // https://courses.thinkful.com/auth-jwt-v1/checkpoint/3
     e.preventDefault()
@@ -40,10 +40,17 @@ export default class LoginPage extends Component {
       TokenService.saveAuthToken(
         TokenService.makeBasicAuthToken(user_name.value, password.value)
       )
-      this.props.onLoginSuccess()
+      this.props.history.push('/manage')
+    } else {
+      document.querySelector('.wrong-login-info').classList.remove('hidden')
+      setTimeout(this.hideNotification, 3000)
     }
     user_name.value = ''
     password.value = ''
+  }
+
+  hideNotification() {
+    document.querySelector('.wrong-login-info').classList.add('hidden')
   }
 
   render() {
@@ -64,6 +71,7 @@ export default class LoginPage extends Component {
                 <label htmlFor="login_password">Password</label>
                 <input id="login_password" type="password" name="password" placeholder='password' onChange={this.handleChange} required />
               </div>
+              <p className="wrong-login-info hidden"><small>Incorrect username or password. Please try again.</small></p>
               <hr />
               <button type="submit">Submit</button>
             </form>
